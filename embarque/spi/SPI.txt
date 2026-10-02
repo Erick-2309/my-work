@@ -1,0 +1,127 @@
+Résumé complet sur SPI (Serial Peripheral Interface)
+1. Qu’est-ce que SPI ?
+SPI est un protocole de communication série synchrone.
+Il permet un échange de données rapide entre un maître (master) et un ou plusieurs esclaves (slaves).
+Il est très utilisé dans l’électronique embarquée (capteurs, mémoires, écrans, etc.).
+
+
+2. Les lignes de SPI
+MOSI (Master Out Slave In) : ligne de données du maître vers l’esclave.
+MISO (Master In Slave Out) : ligne de données de l’esclave vers le maître.
+SCLK (Serial Clock) : horloge fournie par le maître pour synchroniser la communication.
+CS (Chip Select) ou SS (Slave Select) : sélectionne l’esclave actif (niveau bas actif généralement).
+
+
+3. Fonctionnement
+Le maître active la ligne CS du périphérique esclave pour commencer la communication.
+Il génère une horloge SCLK.
+Sur chaque front d’horloge (montant ou descendant, selon mode), un bit est transféré simultanément sur MOSI et MISO (full duplex).
+Le protocole est full-duplex (on peut envoyer et recevoir en même temps).
+
+
+4. Modes SPI
+Le mode SPI est défini par deux paramètres :
+CPOL (Clock Polarity) : niveau logique de l’horloge au repos (idle)
+CPOL=0 → horloge au repos à 0 (bas)
+CPOL=1 → horloge au repos à 1 (haut)
+CPHA (Clock Phase) : moment où les données sont échantillonnées
+CPHA=0 → données lues au premier front d’horloge (front montant si CPOL=0)
+CPHA=1 → données lues au second front d’horloge
+
+Mode SPI.      CPOL  CPHA	Description
+   0		0	0	Horloge idle bas, front montant
+   1		0	1	Horloge idle bas, front descendant
+   2		1	0	Horloge idle haut, front descendant
+   3		1	1	Horloge idle haut, front montant
+
+
+
+5. Caractéristiques importantes
+Transfert bit à bit (minimum 1 bit par cycle d’horloge).
+Vitesse élevée : plusieurs Mbps possibles (selon matériel).
+Nombre de fils : minimum 4 (MOSI, MISO, SCLK, CS).
+Communication full duplex.
+Protocole simple, très répandu.
+
+
+6. Avantages
+Communication rapide et synchronisée.
+Full duplex.
+Contrôle facile grâce à la ligne CS.
+
+
+7. Inconvénients
+Nécessite plusieurs fils.
+Pas de gestion d’erreurs intégrée (contrairement à UART).
+Le maître doit gérer la sélection des esclaves.
+
+
+
+| Élément | Ligne SPI       | Rôle                         |
+| ------- | --------------- | ---------------------------- |
+| Start   | CS = LOW        | Active l’esclave             |
+| Clock   |   SCLK.         | Cadence la communication     |
+| Données |   MOSI / MISO   | Envoi et réception bit à bit |
+| End     |   CS = HIGH     | Termine la trame             |
+
+
+
+
+Question 1
+Topology for SPI
+📝 Your answer: g (I don’t know)
+✅ Correct (if unsure) — No problem here, but for your info:
+SPI uses MOSI, MISO, SCLK, and CS. A correct topology would show those 4 lines.
+
+
+Question 2
+Idle logic level of MOSI
+📝 Your answer: c (N/A - depends on SPI mode)
+✅ Correct — The MOSI line's idle state depends on the hardware configuration and SPI mode.
+
+
+Question 3
+How many lines in standard SPI?
+📝 Your answer: c (4)
+✅ Correct — MOSI, MISO, SCLK, and CS → 4 lines in total.
+
+
+Question 4
+What does “SPI mode” refer to?
+📝 Your answer: b (clock polarity and phase)
+✅ Correct — SPI mode is defined by CPOL and CPHA.
+
+
+Question 5
+Purpose of CS line?
+📝 Your answer: b (indicate to the slave that communication is starting)
+✅ Correct — CS (Chip Select) tells the slave to listen (usually active low).
+
+
+Question 6
+Minimum bits transferred per SPI clock cycle?
+📝 Your answer: a (1 bit)
+✅ Correct — SPI transfers 1 bit per clock cycle, but often groups them into 8-bit words.
+
+
+Question 7
+Advantages of SPI over UART
+📝 Your answer: a & b (full-duplex, clock-synchronized)
+✅ Correct —
+Full duplex: ✅
+Clock-synchronized: ✅
+Requires fewer wires: ❌ (SPI uses more than UART)
+
+
+Question 8
+Typical max speed of SPI?
+📝 Your answer: b (1 Mbps or more)
+✅ Correct — SPI can easily operate at several Mbps, depending on hardware.
+
+
+Question 9
+CPOL=1, CPHA=0 → sampling edge?
+📝 Your answer: b (falling edge)
+✅ Correct —
+CPOL = 1 → clock idle HIGH
+CPHA = 0 → data sampled on the first edge, which is falling.

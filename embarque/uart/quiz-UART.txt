@@ -1,0 +1,171 @@
+UART & Serial Communication Quiz (No Answers) :
+ https://learn.sparkfun.com/tutorials/serial-communication#uarts
+
+
+What is the main purpose of communication protocols in embedded electronics?
+A) To increase processor speed
+B) To exchange data between devices 😎
+C) To store data permanently
+D) To reduce power consumption
+
+
+How does serial communication differ from parallel communication?
+A) Serial sends multiple bits at once, parallel sends one bit at a time
+B) Serial requires more wires than parallel
+C) Serial sends one bit at a time, parallel sends multiple bits simultaneously 😎
+D) Parallel communication is always slower
+
+
+What is one main advantage of parallel communication?
+A) Uses fewer wires
+B) Easier to implement in microcontrollers
+C) Faster data transfer speed 😎
+D) Works without clock signals
+
+
+What does synchronous serial communication require that asynchronous does not?
+A) Start and stop bits
+B) A shared clock signal 😎
+C) Parity bits
+D) Data buffering
+
+
+Which of the following is an example of a synchronous serial protocol?
+A) UART
+B) USB
+C) SPI 😎
+D) Bluetooth
+
+
+Why is UART considered asynchronous?
+A) It uses a clock signal shared between devices
+B) It transmits data without an external clock 😎
+C) It uses parallel data transfer
+D) It only sends data in one direction
+
+
+What does the baud rate represent in UART communication?
+A) Number of bytes per second
+B) Number of bits per second 😎
+C) Number of packets per second
+D) Number of devices on the bus
+
+
+What happens if the transmitting and receiving devices use different baud rates?
+A) Data is transmitted faster
+B) Data is delayed but accurate
+C) Data may be corrupted or lost 😎
+D) Devices automatically adjust speeds
+
+
+In the common 9600 8N1 configuration, how many total bits are transmitted for each byte?
+A) 8
+B) 9
+C) 10 😎
+D) 11
+
+
+What are the start and stop bits used for in UART communication?
+A) To detect errors in data
+B) To identify data bits
+C) To mark the beginning and end of each data frame 😎
+D) To increase data speed
+
+
+What is the purpose of a parity bit in UART communication?
+A) To increase data size
+B) To detect errors in transmission 😎
+C) To synchronize clock signals
+D) To mark the end of a frame
+
+
+What does the "N" in "8N1" indicate?
+A) Number of data bits
+B) No parity 😎
+C) Number of stop bits
+D) Baud rate
+
+
+When wiring two UART devices, which pins should be connected together?
+A) RX to RX, TX to TX
+B) RX to TX, TX to RX 😎
+C) RX to GND, TX to VCC
+D) RX to TX, TX to GND
+
+
+What is the typical voltage range for TTL UART signals?
+A) 0V to 5V
+B) -12V to 12V
+C) 0V to 3.3V or 5V 😎
+D) -5V to 5V
+
+
+What is full-duplex communication?
+A) Sending and receiving data simultaneously 😎
+B) Only sending data
+C) Only receiving data
+D) Taking turns sending and receiving
+
+
+What is bus contention in serial communication?
+A) When two devices transmit simultaneously on the same line 😎
+B) When baud rates do not match
+C) When devices have different parity settings
+D) When data bits are lost
+
+
+What does FIFO stand for in UART buffers?
+A) First In First Out 😎
+B) Fast Input Fast Output
+C) First Input First Output
+D) Fast In Fast Out
+
+
+What is bit-banging in the context of serial communication?
+A) Using hardware UART modules
+B) Using software to manually control serial signals 😎
+C) Error detection method
+D) A type of synchronous communication
+
+
+Why might an engineer use software UART instead of hardware UART?
+A) To save power
+B) To create additional serial ports when hardware UARTs are limited 😎
+C) To increase speed
+D) To avoid wiring errors
+
+
+What can cause a mismatch of voltage levels when connecting two UART devices?
+A) Using different baud rates
+B) Using TTL and RS-232 signal levels without conversion 😎
+C) Incorrect wiring of RX and TX pins
+D) Using different data bits settings
+
+
+Section 6: UART Hardware & Software
+
+Q19. What does a UART module do inside a microcontroller?
+A) Converts serial data to analog
+B) Buffers GPIO data
+C) Manages serial communication by assembling and parsing packets 😎
+D) Provides power to external devices
+
+
+Q20. What is a FIFO buffer in UART communication?
+A) A type of voltage regulator
+B) A memory queue storing received data in order 😎
+C) A register to store pin configurations
+D) A protocol for synchronizing clocks
+
+
+Q21. What does “bit-banging” refer to?
+A) Physically damaging communication wires
+B) A debugging technique for UART
+C) Manually generating serial signals in software without a UART module 😎
+D) Using parity bits incorrectly
+
+Q22. Why might a developer use a Software UART like Arduino's SoftwareSerial library?
+A) To increase baud rate
+B) To reduce memory usage
+C) To create additional UART ports when hardware UARTs are limited 😎
+D) To eliminate the need for TX/RX wiring

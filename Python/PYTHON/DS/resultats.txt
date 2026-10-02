@@ -1,0 +1,7 @@
+Paul : 12 ans
+Élise : 18 ans
+Pierre : 15 ans
+Clara : 20 ans
+Luc : 8 ans
+Ana : 14 ans
+Moyenne : 14.5 ans

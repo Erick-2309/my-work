@@ -1,0 +1,96 @@
+
+
+1. Compilation Du Programme Avec Avr-Gcc
+
+⚠️ Remarque importante
+Pour utiliser _delay_ms() et _delay_us(), il faut aussi définir la fréquence du CPU, sinon la durée des délais sera incorrecte.
+Assure-toi que tu compiles avec l’option suivante :
+-DF_CPU=16000000UL
+Donc la commande complète devient :
+avr-gcc led.c -mmcu=atmega328p -DF_CPU=16000000UL -Os -o led
+
+avr-gcc led.c -Os -o led -mmcu=atmega328p
+avr-gcc : le compilateur GCC pour microcontrôleurs AVR.
+led.c : ton fichier source en langage C.
+-Os : option d’optimisation pour réduire la taille du code compilé (optimisation « size »).
+-o led : spécifie le nom du fichier exécutable de sortie, ici led.
+-mmcu=atmega328p : cible le microcontrôleur ATmega328P (celui utilisé sur Arduino Uno).
+=> Résultat : un fichier binaire exécutable au format ELF nommé led.
+
+
+2. Conversion du fichier ELF en fichier Intel HEX avec avr-objcopy
+
+avr-objcopy -O ihex led led.hex
+avr-objcopy : outil qui convertit des fichiers binaires d’un format à un autre.
+-O ihex : indique que la sortie doit être au format Intel HEX, format texte très utilisé pour programmer les microcontrôleurs.
+led : fichier ELF d’entrée.
+led.hex : fichier de sortie au format Intel HEX.
+=> Résultat : un fichier led.hex prêt à être flashé dans le microcontrôleur.
+
+
+3. Flashage (programmation) de la carte avec avrdude
+
+avrdude -V -F -c arduino -p atmega328p -P /dev/tty.usbmodem14101 -b 115200 -D -U flash:w:led.hex:i
+Voici la décomposition des options :
+Option	Description
+avrdude	Logiciel de programmation pour microcontrôleurs AVR
+-V	Désactive la vérification de la mémoire après programmation (gagne un peu de temps)
+-F	Force la programmation même si l'ID du microcontrôleur ne correspond pas (à utiliser avec précaution)
+-c arduino	Spécifie le type de programmateur — ici, la carte Arduino qui sert d’interface de programmation
+-p atmega328p	Spécifie le microcontrôleur cible : ATmega328P
+-P /dev/tty.usbmodem14101	Port série sur lequel est connectée la carte Arduino
+-b 115200	Vitesse de communication en bauds (115200 bauds)
+-D	Désactive l’effacement automatique de la mémoire flash avant programmation (utile dans certains cas)
+-U flash:w:led.hex:i	Effectue une opération mémoire :
+flash = mémoire flash (programme)	
+w = write (écrire)	
+led.hex = fichier source à programmer	
+i = format Intel HEX	
+En résumé :
+Compile ton programme C (led.c) en binaire pour ATmega328P.
+Convertit ce binaire en fichier .hex compréhensible par le programmateur.
+Programme la puce sur ton Arduino via le port série spécifié.
+Si tu souhaites, je peux aussi t’expliquer comment faire ça via un Makefile ou automatiser la programmation.
+
+
+
+avr-gcc led.c -c -Os -o led.o -mmcu=atmega328p  diference avec avr-gcc led.c -Os -o led -mmcu=atmega328p     
+
+
+
+
+1. Commande avec -c
+
+avr-gcc led.c -c -Os -o led.o -mmcu=atmega328p
+-c signifie "compile seulement" : le compilateur transforme ton fichier source .c en fichier objet .o sans faire la phase de linkage (édition des liens).
+Résultat : un fichier led.o, qui contient du code machine non lié (il faut encore le linker pour créer un exécutable).
+Utilisé quand tu as plusieurs fichiers .c et que tu veux compiler chacun séparément avant de les lier ensemble.
+
+
+2. Commande sans -c
+
+avr-gcc led.c -Os -o led -mmcu=atmega328p
+Ici, pas de -c, donc la compilation est complète :
+Compilation du fichier .c en .o
+Linkage des fichiers objets (ici un seul)
+Création de l’exécutable final (fichier ELF) nommé led.
+Résultat : un fichier led exécutable pour l’AVR.
+Résumé rapide
+Commande	Action	Résultat
+avr-gcc -c led.c -o led.o	Compilation uniquement	Fichier objet .o
+avr-gcc led.c -o led (sans -c)	Compilation + linkage + exécutable	Fichier exécutable ELF
+Exemple d’utilisation classique :
+Plusieurs fichiers source :
+avr-gcc -c file1.c -o file1.o
+avr-gcc -c file2.c -o file2.o
+avr-gcc file1.o file2.o -o program
+
+
+
+
+| Fichier   | Format    | Contenu principal          | Rôle                                          |
+| --------- | --------- | -------------------------- | --------------------------------------------- |
+| `led.c`   | Texte     | Code source en C           | Point de départ                               |
+| `led.o`   | ELF       | Code machine **partiel**   | Résultat de la compilation, sans linkage      |
+| `led`     | ELF       | Code machine **complet**   | Fichier exécutable, avec toutes les sections  |
+| `led.hex` | Intel HEX | Code machine **flashable** | Fichier **à flasher** dans le microcontrôleur |

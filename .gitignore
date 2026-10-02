@@ -3,3 +3,31 @@ __pycache__/
 *.pyc
 .ipynb_checkpoints/
 .env
+
+# C / C++ / compilation
+*.o
+*.obj
+*.exe
+*.out
+*.elf
+*.hex
+*.bin
+*.map
+build/
+Debug/
+Release/
+
+# Qt
+*.pro.user*
+*.autosave
+moc_*.cpp
+ui_*.h
+qrc_*.cpp
+Makefile*
+*build-*/
+
+# Embarqué / IDE
+.vscode/
+.idea/
+.pio/
+*.uvguix.*

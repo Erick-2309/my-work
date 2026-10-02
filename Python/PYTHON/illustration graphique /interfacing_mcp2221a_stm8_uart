@@ -1,0 +1,24 @@
+// Interfaçage MCP2221A ↔ STM8 Discovery (UART 3.3V)
+digraph {
+	rankdir=LR size="10,5"
+	PC [label="PC (via USB)" fillcolor="#D6EAF8" shape=ellipse style=filled]
+	MCP [label="MCP2221A
+(3.3V / UART ↔ USB)" fillcolor="#ABEBC6" shape=box style=filled]
+	STM8 [label="STM8 Discovery
+(3.3V)" fillcolor="#F9E79F" shape=box style=filled]
+	VDD [label="3.3V" fillcolor="#FADBD8" shape=ellipse style=filled]
+	GND [label=GND fillcolor="#D5DBDB" shape=ellipse style=filled]
+	PC -> MCP [label=USB style=bold]
+	MCP -> STM8 [label="TX → RX" color=blue]
+	STM8 -> MCP [label="TX → RX" color=blue]
+	VDD -> MCP [label=VDD]
+	VDD -> STM8 [label=VDD]
+	GND -> MCP [label=GND]
+	GND -> STM8 [label=GND]
+	R1 [label="10kΩ" shape=component]
+	VDD -> R1 [arrowhead=none]
+	R1 -> MCP [label="→ RESET" arrowhead=normal]
+	SW1 [label="Bouton (option)" shape=circle]
+	SW1 -> MCP [label=RESET arrowhead=normal]
+	SW1 -> GND [arrowhead=normal]
+}
