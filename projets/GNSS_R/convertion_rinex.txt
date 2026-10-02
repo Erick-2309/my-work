@@ -1,0 +1,7 @@
+
+
+
+
+./convbin -r stq -v 3.04 -od -os -o mes_mesures.obs -n mes_mesures.nav -g /dev/null -h /dev/null -q /dev/null -l /dev/null enregistrement_brut.bin
+
+
